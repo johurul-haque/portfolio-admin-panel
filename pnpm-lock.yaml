@@ -5,14 +5,14 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@hono/node-server':
+    specifier: ^1.12.0
+    version: 1.12.0
   hono:
     specifier: ^4.4.12
     version: 4.4.12
 
 devDependencies:
-  '@hono/node-server':
-    specifier: ^1.12.0
-    version: 1.12.0
   tsx:
     specifier: ^4.16.2
     version: 4.16.2
@@ -278,7 +278,7 @@ packages:
   /@hono/node-server@1.12.0:
     resolution: {integrity: sha512-e6oHjNiErRxsZRZBmc2KucuvY3btlO/XPncIpP2X75bRdTilF9GLjm3NHvKKunpJbbJJj31/FoPTksTf8djAVw==}
     engines: {node: '>=18.14.1'}
-    dev: true
+    dev: false
 
   /@jridgewell/resolve-uri@3.1.2:
     resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}

@@ -3,14 +3,14 @@
   "type": "module",
   "scripts": {
     "start": "vercel dev",
-    "dev": "tsx watch ./api/index.ts",
+    "dev": "tsx watch ./server/index.ts",
     "deploy": "vercel"
   },
   "dependencies": {
+    "@hono/node-server": "^1.12.0",
     "hono": "^4.4.12"
   },
   "devDependencies": {
-    "@hono/node-server": "^1.12.0",
     "tsx": "^4.16.2",
     "vercel": "^32.4.1"
   }
