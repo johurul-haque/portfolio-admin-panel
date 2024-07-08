@@ -12,3 +12,5 @@ const apiRoutes = app.basePath('/api').get('/', (c) => {
 
 app.get('*', serveStatic({ root: './client/dist' }));
 app.get('*', serveStatic({ path: './client/dist/index.html' }));
+
+export type ApiRoutes = typeof apiRoutes;
