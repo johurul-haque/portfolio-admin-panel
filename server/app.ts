@@ -1,5 +1,6 @@
 import { serveStatic } from '@hono/node-server/serve-static';
 import { Hono } from 'hono';
+import { HTTPException } from 'hono/http-exception';
 import { logger } from 'hono/logger';
 
 export const app = new Hono();
@@ -7,7 +8,9 @@ export const app = new Hono();
 app.use('*', logger());
 
 const apiRoutes = app.basePath('/api').get('/', (c) => {
-  return c.json({ message: 'Hello Hono!' });
+  throw new HTTPException(401);
+  return c.json({ message: 'Unauthorized' }, 401);
+  // return c.json({ mess: `Hello Hono! ${env.DB_URI}` });
 });
 
 app.get('*', serveStatic({ root: './client/dist' }));

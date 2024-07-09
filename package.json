@@ -2,13 +2,16 @@
   "name": "portfolio-admin-panel",
   "type": "module",
   "scripts": {
-    "start": "vercel dev",
+    "i:dep": "pnpm i && cd client && pnpm i",
     "dev": "tsx watch ./server/index.ts",
+    "build": "cd client && pnpm install --frozen-lockfile && pnpm build",
     "deploy": "vercel"
   },
   "dependencies": {
     "@hono/node-server": "^1.12.0",
-    "hono": "^4.4.12"
+    "dotenv": "^16.4.5",
+    "hono": "^4.4.12",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "tsx": "^4.16.2",
