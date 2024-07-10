@@ -1,5 +1,4 @@
 import { env } from '@/config/env';
-import { excludeFields } from '@/utils/exclude-fields';
 import { db } from '@db';
 import { usersTable } from '@db/schema/user';
 import bcrypt from 'bcrypt';
@@ -32,9 +31,9 @@ export async function login(payload: z.infer<typeof loginPayload>) {
 }
 
 export async function getUser() {
-  return db
-    .select()
-    .from(usersTable)
-    .where(eq(usersTable.username, 'johurul_haque'))
-    .then((res) => excludeFields(res[0], ['password']));
+  return db.query.users.findFirst({
+    columns: {
+      password: false,
+    },
+  });
 }
