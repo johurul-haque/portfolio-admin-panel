@@ -1,4 +1,5 @@
 import { env } from '@/config/env';
+import { excludeFields } from '@/utils/exclude-fields';
 import { db } from '@db';
 import { usersTable } from '@db/schema/user';
 import bcrypt from 'bcrypt';
@@ -28,4 +29,12 @@ export async function login(payload: z.infer<typeof loginPayload>) {
   const token = await sign({ username: user.username }, env.JWT_SECRET);
 
   return { username: user.username, token };
+}
+
+export async function getUser() {
+  return db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.username, 'johurul_haque'))
+    .then((res) => excludeFields(res[0], ['password']));
 }

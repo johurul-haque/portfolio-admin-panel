@@ -1,35 +1,22 @@
+import { authMiddleware } from '@/middlewares/auth-middleware';
 import { zValidator } from '@hono/zod-validator';
 import { Hono } from 'hono';
 import { setCookie } from 'hono/cookie';
-import { login } from './auth.service';
+import { getUser, login } from './auth.service';
 import { loginPayload } from './auth.validation';
 
 export const authRoutes = new Hono()
-  .use('/auth')
+  .get('/profile', authMiddleware(), async (c) => {
+    const result = await getUser();
+
+    return c.json(result);
+  })
   .post('/login', zValidator('json', loginPayload), async (c) => {
     const payload = c.req.valid('json');
 
     const { token, username } = await login(payload);
 
-    setCookie(c, 'token', token);
+    setCookie(c, 'token', token, { httpOnly: true, secure: true });
 
     return c.json({ username, token });
   });
-
-// new Hono().use(
-//   bearerAuth({
-//     verifyToken: async (_, c) => {
-//       try {
-//         const token = getCookie(c, 'token');
-
-//         if (!token) return false;
-
-//         await verify(token, env.JWT_SECRET);
-
-//         return true;
-//       } catch (error) {
-//         return false;
-//       }
-//     },
-//   })
-// );
