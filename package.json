@@ -5,15 +5,24 @@
     "i:dep": "pnpm i && cd client && pnpm i",
     "dev": "tsx watch ./server/index.ts",
     "build": "cd client && pnpm install --frozen-lockfile && pnpm build",
-    "deploy": "vercel"
+    "db:seed": "tsx server/db/seed.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "pnpm db:generate && tsx server/db/migrate.ts",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@hono/node-server": "^1.12.0",
+    "@hono/zod-validator": "^0.2.2",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.31.4",
     "hono": "^4.4.12",
+    "postgres": "^3.4.4",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "drizzle-kit": "^0.22.8",
     "tsx": "^4.16.2",
     "vercel": "^32.4.1"
   }

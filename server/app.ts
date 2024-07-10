@@ -9,8 +9,7 @@ app.use('*', logger());
 
 const apiRoutes = app.basePath('/api').get('/', (c) => {
   throw new HTTPException(401);
-  return c.json({ message: 'Unauthorized' }, 401);
-  // return c.json({ mess: `Hello Hono! ${env.DB_URI}` });
+  return c.json({ message: 'Hello world!' });
 });
 
 app.get('*', serveStatic({ root: './client/dist' }));
