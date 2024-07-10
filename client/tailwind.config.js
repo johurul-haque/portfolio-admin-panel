@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import tailwindcssAnimate from 'tailwindcss-animate';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
@@ -11,7 +12,11 @@ export default {
         '2xl': '1400px',
       },
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['"Poppins"', ...defaultTheme.fontFamily.sans],
+      },
+    },
   },
   plugins: [tailwindcssAnimate],
 };

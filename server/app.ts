@@ -1,11 +1,11 @@
-import { authRoutes } from '@/modules/auth/auth.route';
 import { serveStatic } from '@hono/node-server/serve-static';
 import { Hono } from 'hono';
-// import { logger } from 'hono/logger';
+import { logger } from 'hono/logger';
+import { authRoutes } from './src/modules/auth/auth.route';
 
 export const app = new Hono();
 
-// app.use('*', logger());
+app.use('*', logger());
 
 const apiRoutes = app.basePath('/api').route('/auth', authRoutes);
 

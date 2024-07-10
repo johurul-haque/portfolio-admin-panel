@@ -1,22 +1,19 @@
-import { env } from '@/config/env';
-import { bearerAuth } from 'hono/bearer-auth';
 import { getCookie } from 'hono/cookie';
+import { createMiddleware } from 'hono/factory';
+import { HTTPException } from 'hono/http-exception';
 import { verify } from 'hono/jwt';
+import { env } from '../config/env';
 
-export function authMiddleware() {
-  return bearerAuth({
-    verifyToken: async (_, c) => {
-      try {
-        const token = getCookie(c, 'token');
+export const authMiddleware = createMiddleware(async (c, next) => {
+  try {
+    const token = getCookie(c, 'token');
 
-        if (!token) return false;
+    if (!token) throw new Error();
 
-        await verify(token, env.JWT_SECRET);
+    await verify(token, env.JWT_SECRET);
 
-        return true;
-      } catch (error) {
-        return false;
-      }
-    },
-  });
-}
+    await next();
+  } catch (error) {
+    throw new HTTPException(401, { message: 'Unauthorized' });
+  }
+});

@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./server/src/*"],
-      "@db": ["./server/db"],
-      "@db/*": ["./server/db/*"]
-    },
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@/*": ["./server/src/*"],
+    //   "@db": ["./server/db"],
+    //   "@db/*": ["./server/db/*"]
+    // },
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "node",
@@ -13,4 +13,5 @@
     "skipLibCheck": true,
     "strict": true
   },
+  "exclude": ["client/**/*.js", "client/**/*.ts"]
 }

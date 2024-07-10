@@ -1,11 +1,11 @@
-import { env } from '@/config/env';
-import { db } from '@db';
-import { usersTable } from '@db/schema/user';
 import bcrypt from 'bcrypt';
 import { eq } from 'drizzle-orm';
 import { HTTPException } from 'hono/http-exception';
 import { sign } from 'hono/jwt';
 import { z } from 'zod';
+import { db } from '../../../db';
+import { usersTable } from '../../../db/schema/user';
+import { env } from '../../config/env';
 import { loginPayload } from './auth.validation';
 
 export async function login(payload: z.infer<typeof loginPayload>) {
