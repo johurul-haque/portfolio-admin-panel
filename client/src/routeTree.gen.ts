@@ -13,6 +13,9 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedCreateImport } from './routes/_authenticated/create'
+import { Route as AuthenticatedBlogsIndexImport } from './routes/_authenticated/blogs/index'
+import { Route as AuthenticatedBlogsCreateImport } from './routes/_authenticated/blogs/create'
 
 // Create/Update Routes
 
@@ -23,6 +26,21 @@ const AuthenticatedRoute = AuthenticatedImport.update({
 
 const AuthenticatedIndexRoute = AuthenticatedIndexImport.update({
   path: '/',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedCreateRoute = AuthenticatedCreateImport.update({
+  path: '/create',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedBlogsIndexRoute = AuthenticatedBlogsIndexImport.update({
+  path: '/blogs/',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedBlogsCreateRoute = AuthenticatedBlogsCreateImport.update({
+  path: '/blogs/create',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
@@ -37,11 +55,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedImport
       parentRoute: typeof rootRoute
     }
+    '/_authenticated/create': {
+      id: '/_authenticated/create'
+      path: '/create'
+      fullPath: '/create'
+      preLoaderRoute: typeof AuthenticatedCreateImport
+      parentRoute: typeof AuthenticatedImport
+    }
     '/_authenticated/': {
       id: '/_authenticated/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/blogs/create': {
+      id: '/_authenticated/blogs/create'
+      path: '/blogs/create'
+      fullPath: '/blogs/create'
+      preLoaderRoute: typeof AuthenticatedBlogsCreateImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/blogs/': {
+      id: '/_authenticated/blogs/'
+      path: '/blogs'
+      fullPath: '/blogs'
+      preLoaderRoute: typeof AuthenticatedBlogsIndexImport
       parentRoute: typeof AuthenticatedImport
     }
   }
@@ -51,7 +90,10 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   AuthenticatedRoute: AuthenticatedRoute.addChildren({
+    AuthenticatedCreateRoute,
     AuthenticatedIndexRoute,
+    AuthenticatedBlogsCreateRoute,
+    AuthenticatedBlogsIndexRoute,
   }),
 })
 
@@ -69,11 +111,26 @@ export const routeTree = rootRoute.addChildren({
     "/_authenticated": {
       "filePath": "_authenticated.tsx",
       "children": [
-        "/_authenticated/"
+        "/_authenticated/create",
+        "/_authenticated/",
+        "/_authenticated/blogs/create",
+        "/_authenticated/blogs/"
       ]
+    },
+    "/_authenticated/create": {
+      "filePath": "_authenticated/create.tsx",
+      "parent": "/_authenticated"
     },
     "/_authenticated/": {
       "filePath": "_authenticated/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/blogs/create": {
+      "filePath": "_authenticated/blogs/create.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/blogs/": {
+      "filePath": "_authenticated/blogs/index.tsx",
       "parent": "/_authenticated"
     }
   }

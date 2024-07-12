@@ -59,7 +59,7 @@ export function LoginForm() {
     <main className="container min-h-[max(650px,100svh)] grid place-items-center">
       <Card className="mx-auto max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle>Login</CardTitle>
           <CardDescription>
             Enter your credentials below to login to your account
           </CardDescription>

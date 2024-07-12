@@ -1,4 +1,5 @@
 import { userQueryOptions } from '@/api';
+import { Header } from '@/components/header';
 import { LoginForm } from '@/components/layout/login';
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 
@@ -20,5 +21,13 @@ function Component() {
 
   if (!user) return <LoginForm />;
 
-  return <Outlet />;
+  return (
+    <>
+      <Header />
+
+      <div className="container py-6">
+        <Outlet />
+      </div>
+    </>
+  );
 }
