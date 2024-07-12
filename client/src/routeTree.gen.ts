@@ -16,6 +16,7 @@ import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index
 import { Route as AuthenticatedCreateImport } from './routes/_authenticated/create'
 import { Route as AuthenticatedBlogsIndexImport } from './routes/_authenticated/blogs/index'
 import { Route as AuthenticatedBlogsCreateImport } from './routes/_authenticated/blogs/create'
+import { Route as AuthenticatedBlogsBlogsIdEditImport } from './routes/_authenticated/blogs/$blogsId/edit'
 
 // Create/Update Routes
 
@@ -43,6 +44,12 @@ const AuthenticatedBlogsCreateRoute = AuthenticatedBlogsCreateImport.update({
   path: '/blogs/create',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+
+const AuthenticatedBlogsBlogsIdEditRoute =
+  AuthenticatedBlogsBlogsIdEditImport.update({
+    path: '/blogs/$blogsId/edit',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -83,6 +90,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedBlogsIndexImport
       parentRoute: typeof AuthenticatedImport
     }
+    '/_authenticated/blogs/$blogsId/edit': {
+      id: '/_authenticated/blogs/$blogsId/edit'
+      path: '/blogs/$blogsId/edit'
+      fullPath: '/blogs/$blogsId/edit'
+      preLoaderRoute: typeof AuthenticatedBlogsBlogsIdEditImport
+      parentRoute: typeof AuthenticatedImport
+    }
   }
 }
 
@@ -94,6 +108,7 @@ export const routeTree = rootRoute.addChildren({
     AuthenticatedIndexRoute,
     AuthenticatedBlogsCreateRoute,
     AuthenticatedBlogsIndexRoute,
+    AuthenticatedBlogsBlogsIdEditRoute,
   }),
 })
 
@@ -114,7 +129,8 @@ export const routeTree = rootRoute.addChildren({
         "/_authenticated/create",
         "/_authenticated/",
         "/_authenticated/blogs/create",
-        "/_authenticated/blogs/"
+        "/_authenticated/blogs/",
+        "/_authenticated/blogs/$blogsId/edit"
       ]
     },
     "/_authenticated/create": {
@@ -131,6 +147,10 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_authenticated/blogs/": {
       "filePath": "_authenticated/blogs/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/blogs/$blogsId/edit": {
+      "filePath": "_authenticated/blogs/$blogsId/edit.tsx",
       "parent": "/_authenticated"
     }
   }
