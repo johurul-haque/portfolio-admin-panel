@@ -21,7 +21,7 @@ export const blogRoutes = new Hono()
 
     const result = await getSingleBlog(blogId);
 
-    if (!result) return c.notFound();
+    if (!result) c.notFound();
 
     return c.json(result);
   })
@@ -42,7 +42,7 @@ export const blogRoutes = new Hono()
 
       const result = await updateBlog(blogId, payload);
 
-      if (!result) return c.notFound();
+      if (!result) c.notFound();
 
       return c.json(result, 201);
     }
@@ -52,7 +52,7 @@ export const blogRoutes = new Hono()
 
     const result = await deleteBlog(blogId);
 
-    if (!result) return c.notFound();
+    if (!result) c.notFound();
 
     return c.json(result);
   });

@@ -6,26 +6,44 @@ import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { ChevronLeft } from 'lucide-react';
 import { toast } from 'sonner';
 
-export const Route = createFileRoute('/_authenticated/blogs/create')({
+export const Route = createFileRoute('/_authenticated/blogs/$blogId/edit')({
+  loader: async ({ params: { blogId }, context: { queryClient } }) => {
+    const data = await queryClient.fetchQuery({
+      queryKey: [blogId],
+      queryFn: async () => {
+        const res = await api.blogs[':blogId'].$get({ param: { blogId } });
+
+        return await handleResponse(res);
+      },
+      staleTime: 0,
+    });
+
+    return data;
+  },
   component: Component,
 });
 
 function Component() {
+  const blog = Route.useLoaderData();
+
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (values: blogFormSchema) => {
-      const res = await api.blogs.create.$post({ json: values });
+      const res = await api.blogs[':blogId'].edit.$patch({
+        json: values,
+        param: { blogId: blog.id },
+      });
 
       return await handleResponse(res);
     },
     onSuccess: () => {
       toast('Success!', {
-        description: 'Published new blog.',
+        description: 'Blog updated successfully',
       });
 
-      queryClient.invalidateQueries({ queryKey: ['blogs'] });
+      queryClient.invalidateQueries({ queryKey: ['blogs', blog.id] });
       navigate({ to: '/blogs' });
     },
     onError: (error) => {
@@ -43,10 +61,10 @@ function Component() {
       </Link>
 
       <h1 className="text-2xl font-semibold leading-none tracking-tight">
-        Add a new blog
+        Edit blog post
       </h1>
 
-      <BlogForm mutate={mutate} isPending={isPending} />
+      <BlogForm mutate={mutate} defaultValues={blog} isPending={isPending} />
     </main>
   );
 }

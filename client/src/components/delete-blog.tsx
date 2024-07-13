@@ -1,3 +1,4 @@
+import { api } from '@/api';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,11 +10,35 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { handleResponse } from '@/lib/handle-response';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Trash2Icon } from 'lucide-react';
+import { toast } from 'sonner';
 import { Button, buttonVariants } from './ui/button';
 
 export function DeleteBlog({ blogId }: { blogId: string }) {
-  console.log(blogId);
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: async () => {
+      const res = await api.blogs[':blogId'].$delete({ param: { blogId } });
+
+      return await handleResponse(res);
+    },
+    onSuccess: () => {
+      toast('Success!', {
+        description: 'Blog has been deleted.',
+      });
+
+      queryClient.invalidateQueries({ queryKey: ['blogs'] });
+    },
+    onError: (error) => {
+      toast('Something went wrong', {
+        description: error.message,
+      });
+    },
+  });
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -35,8 +60,10 @@ export function DeleteBlog({ blogId }: { blogId: string }) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
           <AlertDialogAction
+            disabled={isPending}
+            onClick={() => mutate()}
             className={buttonVariants({ variant: 'destructive' })}
           >
             Continue

@@ -26,9 +26,11 @@ export type blogFormSchema = z.infer<typeof blogFormSchema>;
 
 export function BlogForm({
   defaultValues,
-  mutate
+  mutate,
+  isPending,
 }: {
   defaultValues?: blogFormSchema;
+  isPending: boolean;
   mutate: UseMutateFunction<
     unknown,
     Error,
@@ -60,7 +62,11 @@ export function BlogForm({
             <FormItem>
               <FormLabel>Blog Title</FormLabel>
               <FormControl>
-                <Input placeholder="WebHooks - An introduction" {...field} />
+                <Input
+                  placeholder="WebHooks - An introduction"
+                  {...field}
+                  disabled={isPending}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -88,6 +94,7 @@ export function BlogForm({
                           class: `prose prose-lg dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full`,
                         },
                       }}
+                      editable={!isPending}
                       onUpdate={({ editor }) => {
                         field.onChange(editor.getJSON());
                       }}
@@ -100,7 +107,9 @@ export function BlogForm({
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={isPending}>
+          Submit
+        </Button>
       </form>
     </Form>
   );
