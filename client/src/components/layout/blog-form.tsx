@@ -18,7 +18,6 @@ import './prosemirror.css';
 
 const formSchema = z.object({
   title: z.string(),
-  short_description: z.string(),
   content: z.unknown().transform((value) => JSON.stringify(value)),
 });
 
@@ -47,23 +46,6 @@ export function BlogForm({ defaultValues }: { defaultValues?: formSchema }) {
               <FormLabel>Blog Title</FormLabel>
               <FormControl>
                 <Input placeholder="WebHooks - An introduction" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="short_description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Short Description</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="A WebHook is an HTTP callback, that occurs when something happens."
-                  {...field}
-                />
               </FormControl>
               <FormMessage />
             </FormItem>
