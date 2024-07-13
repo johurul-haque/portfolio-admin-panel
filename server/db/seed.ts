@@ -1,7 +1,7 @@
-import { env } from '@/config/env';
-import { db } from '@db';
 import { hashSync } from 'bcrypt';
 import { eq } from 'drizzle-orm';
+import { db } from '.';
+import { env } from '../src/config/env';
 import { usersTable } from './schema/user';
 
 (async () => {
