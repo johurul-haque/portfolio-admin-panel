@@ -16,7 +16,7 @@ import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index
 import { Route as AuthenticatedCreateImport } from './routes/_authenticated/create'
 import { Route as AuthenticatedBlogsIndexImport } from './routes/_authenticated/blogs/index'
 import { Route as AuthenticatedBlogsCreateImport } from './routes/_authenticated/blogs/create'
-import { Route as AuthenticatedBlogsBlogsIdEditImport } from './routes/_authenticated/blogs/$blogsId/edit'
+import { Route as AuthenticatedBlogsBlogIdEditImport } from './routes/_authenticated/blogs/$blogId/edit'
 
 // Create/Update Routes
 
@@ -45,9 +45,9 @@ const AuthenticatedBlogsCreateRoute = AuthenticatedBlogsCreateImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
-const AuthenticatedBlogsBlogsIdEditRoute =
-  AuthenticatedBlogsBlogsIdEditImport.update({
-    path: '/blogs/$blogsId/edit',
+const AuthenticatedBlogsBlogIdEditRoute =
+  AuthenticatedBlogsBlogIdEditImport.update({
+    path: '/blogs/$blogId/edit',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
 
@@ -90,11 +90,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedBlogsIndexImport
       parentRoute: typeof AuthenticatedImport
     }
-    '/_authenticated/blogs/$blogsId/edit': {
-      id: '/_authenticated/blogs/$blogsId/edit'
-      path: '/blogs/$blogsId/edit'
-      fullPath: '/blogs/$blogsId/edit'
-      preLoaderRoute: typeof AuthenticatedBlogsBlogsIdEditImport
+    '/_authenticated/blogs/$blogId/edit': {
+      id: '/_authenticated/blogs/$blogId/edit'
+      path: '/blogs/$blogId/edit'
+      fullPath: '/blogs/$blogId/edit'
+      preLoaderRoute: typeof AuthenticatedBlogsBlogIdEditImport
       parentRoute: typeof AuthenticatedImport
     }
   }
@@ -108,7 +108,7 @@ export const routeTree = rootRoute.addChildren({
     AuthenticatedIndexRoute,
     AuthenticatedBlogsCreateRoute,
     AuthenticatedBlogsIndexRoute,
-    AuthenticatedBlogsBlogsIdEditRoute,
+    AuthenticatedBlogsBlogIdEditRoute,
   }),
 })
 
@@ -130,7 +130,7 @@ export const routeTree = rootRoute.addChildren({
         "/_authenticated/",
         "/_authenticated/blogs/create",
         "/_authenticated/blogs/",
-        "/_authenticated/blogs/$blogsId/edit"
+        "/_authenticated/blogs/$blogId/edit"
       ]
     },
     "/_authenticated/create": {
@@ -149,8 +149,8 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_authenticated/blogs/index.tsx",
       "parent": "/_authenticated"
     },
-    "/_authenticated/blogs/$blogsId/edit": {
-      "filePath": "_authenticated/blogs/$blogsId/edit.tsx",
+    "/_authenticated/blogs/$blogId/edit": {
+      "filePath": "_authenticated/blogs/$blogId/edit.tsx",
       "parent": "/_authenticated"
     }
   }

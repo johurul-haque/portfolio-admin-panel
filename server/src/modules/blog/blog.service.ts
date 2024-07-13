@@ -12,7 +12,11 @@ export async function createBlog(payload: z.infer<typeof createBlogPayload>) {
 }
 
 export async function getAllBlogs() {
-  return db.query.blogs.findMany();
+  return db.query.blogs.findMany({
+    columns: {
+      content: false,
+    },
+  });
 }
 
 export async function getSingleBlog(blogId: string) {
