@@ -4,22 +4,22 @@ import { LoginForm } from '@/components/layout/login';
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_authenticated')({
-  beforeLoad: async ({ context: { queryClient } }) => {
+  beforeLoad: async ({ context: { queryClient }, location }) => {
     try {
       const user = await queryClient.fetchQuery(userQueryOptions);
 
       return { user };
     } catch (error) {
-      return { user: null };
+      return { user: null, redirectTo: location.href };
     }
   },
   component: () => <Component />,
 });
 
 function Component() {
-  const { user } = Route.useRouteContext();
+  const { user,redirectTo } = Route.useRouteContext();
 
-  if (!user) return <LoginForm />;
+  if (!user) return <LoginForm redirectTo={redirectTo} />;
 
   return (
     <>

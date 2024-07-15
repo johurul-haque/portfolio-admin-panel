@@ -37,7 +37,7 @@ const formSchema = z.object({
 
 type formSchema = z.infer<typeof formSchema>;
 
-export function LoginForm() {
+export function LoginForm({ redirectTo }: { redirectTo: string }) {
   const navigate = useNavigate();
 
   const { mutate, isPending, error } = useMutation({
@@ -47,7 +47,7 @@ export function LoginForm() {
       await handleResponse(res);
     },
     onSuccess: () => {
-      navigate({ to: '/' });
+      navigate({ to: redirectTo });
     },
   });
 
@@ -56,7 +56,7 @@ export function LoginForm() {
   });
 
   return (
-    <main className="container min-h-[max(650px,100svh)] grid place-items-center">
+    <main className="min-h-[max(650px,100svh)] grid place-items-center">
       <Card className="mx-auto max-w-sm">
         <CardHeader>
           <CardTitle>Login</CardTitle>
