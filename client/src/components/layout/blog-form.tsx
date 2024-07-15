@@ -23,11 +23,7 @@ const blogFormSchema = z.object({
 
 export type blogFormSchema = z.infer<typeof blogFormSchema>;
 
-export function BlogForm({
-  defaultValues,
-  mutate,
-  isPending,
-}: {
+type PropsType = {
   defaultValues?: blogFormSchema;
   isPending: boolean;
   mutate: UseMutateFunction<
@@ -39,7 +35,9 @@ export function BlogForm({
     },
     unknown
   >;
-}) {
+};
+
+export function BlogForm({ defaultValues, mutate, isPending }: PropsType) {
   const form = useForm<blogFormSchema>({
     resolver: zodResolver(blogFormSchema),
     defaultValues: {
@@ -79,13 +77,11 @@ export function BlogForm({
             <FormItem>
               <FormLabel>Content</FormLabel>
               <FormControl>
-                <div className="border rounded-md border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950">
-                  <Editor
-                    onChange={field.onChange}
-                    value={field.value as unknown as JSONContent}
-                    disabled={isPending}
-                  />
-                </div>
+                <Editor
+                  onChange={field.onChange}
+                  value={field.value as unknown as JSONContent}
+                  disabled={isPending}
+                />
               </FormControl>
               <FormDescription>Use markdown formats</FormDescription>
               <FormMessage />

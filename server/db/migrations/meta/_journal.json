@@ -43,6 +43,13 @@
       "when": 1721040952879,
       "tag": "0005_quick_penance",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1721067326839,
+      "tag": "0006_overrated_lady_vermin",
+      "breakpoints": true
     }
   ]
 }

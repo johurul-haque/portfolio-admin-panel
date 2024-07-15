@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router';
 
 const NAV_LINKS = [
   ['Projects', '/'],
-  ['Experience', '/experience'],
+  ['Personal', '/personal'],
   ['Blogs', '/blogs'],
 ];
 

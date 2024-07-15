@@ -21,7 +21,7 @@ export function Editor({
             keydown: (_view, event) => handleCommandNavigation(event),
           },
           attributes: {
-            class: `prose prose-lg dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full`,
+            class: `prose prose-lg dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full border rounded-md border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950`,
           },
         }}
         editable={!disabled}

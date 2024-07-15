@@ -7,13 +7,12 @@ export const aboutInfoTable = d.pgTable('about_info', {
   designation: d.text('designation').notNull(),
   about: d.text('about').notNull(),
   photo: d.text('photo').notNull(),
-  skills: d.text('skills').array().notNull(),
-  contact: d.text('contact').array().notNull(),
+  skills: d.text('skills').notNull(),
+  contacts: d.text('contacts').array().notNull(),
 });
 
 export const aboutInfoPayload = createInsertSchema(aboutInfoTable, {
-  skills: z.string().array(),
-  contact: z.string().array(),
+  contacts: z.string().array(),
 }).omit({
   id: true,
 });
