@@ -11,11 +11,10 @@ import {
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UseMutateFunction } from '@tanstack/react-query';
-import { EditorContent, EditorRoot, JSONContent } from 'novel';
-import { StarterKit, handleCommandNavigation } from 'novel/extensions';
+import { JSONContent } from 'novel';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import './prosemirror.css';
+import { Editor } from '../editor';
 
 const blogFormSchema = z.object({
   title: z.string(),
@@ -81,25 +80,11 @@ export function BlogForm({
               <FormLabel>Content</FormLabel>
               <FormControl>
                 <div className="border rounded-md border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950">
-                  <EditorRoot>
-                    <EditorContent
-                      extensions={[StarterKit]}
-                      initialContent={field.value as unknown as JSONContent}
-                      editorProps={{
-                        handleDOMEvents: {
-                          keydown: (_view, event) =>
-                            handleCommandNavigation(event),
-                        },
-                        attributes: {
-                          class: `prose prose-lg dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full`,
-                        },
-                      }}
-                      editable={!isPending}
-                      onUpdate={({ editor }) => {
-                        field.onChange(editor.getJSON());
-                      }}
-                    />
-                  </EditorRoot>
+                  <Editor
+                    onChange={field.onChange}
+                    value={field.value as unknown as JSONContent}
+                    disabled={isPending}
+                  />
                 </div>
               </FormControl>
               <FormDescription>Use markdown formats</FormDescription>
