@@ -1,6 +1,7 @@
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import { env } from '../src/config/env';
+import { aboutInfoTable } from './schema/about-info';
 import { blogsTable } from './schema/blog';
 import { usersTable } from './schema/user';
 
@@ -10,5 +11,6 @@ export const db = drizzle(client, {
   schema: {
     users: usersTable,
     blogs: blogsTable,
+    aboutInfo: aboutInfoTable,
   },
 });
