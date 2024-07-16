@@ -43,7 +43,7 @@ function App() {
       <Table className="my-6">
         <TableHeader>
           <TableRow className="lowercase font-mono">
-            <TableHead>Title</TableHead>
+            <TableHead>name</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
