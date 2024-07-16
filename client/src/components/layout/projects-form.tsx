@@ -14,6 +14,7 @@ import { createProjectSchema } from '@server/db/schema/project';
 import { UseMutateFunction } from '@tanstack/react-query';
 import { Trash2Icon } from 'lucide-react';
 import { useFieldArray, useForm } from 'react-hook-form';
+import Textarea from 'react-textarea-autosize';
 import { z } from 'zod';
 
 const imageSchema = z.object({
@@ -225,7 +226,7 @@ export function ProjectsForm({ isPending, mutate, defaultValues }: PropsType) {
 
           <div
             className={cn('grid', {
-              'grid-cols-2 justify-start gap-4':
+              'sm:grid-cols-2 sm:justify-start gap-4':
                 desktopViewArray.fields.length > 1,
             })}
           >
@@ -237,6 +238,7 @@ export function ProjectsForm({ isPending, mutate, defaultValues }: PropsType) {
                   {fields.length > 1 && (
                     <Button
                       variant={'outline'}
+                      type="button"
                       size={'icon'}
                       title="Remove field"
                       className="h-7 w-7"
@@ -280,7 +282,7 @@ export function ProjectsForm({ isPending, mutate, defaultValues }: PropsType) {
                       <FormLabel className="sr-only">caption</FormLabel>
 
                       <FormControl>
-                        <textarea
+                        <Textarea
                           className={inputStyle({
                             className: 'resize-y min-h-10',
                           })}
@@ -321,8 +323,8 @@ export function ProjectsForm({ isPending, mutate, defaultValues }: PropsType) {
           <div className="text-sm font-medium mb-2">Mobile view images</div>
 
           <div
-            className={cn('grid', {
-              'grid-cols-2 justify-start gap-4':
+            className={cn('grid mx-auto', {
+              'sm:grid-cols-2 sm:justify-start gap-4':
                 mobileViewArray.fields.length > 1,
             })}
           >
@@ -336,6 +338,7 @@ export function ProjectsForm({ isPending, mutate, defaultValues }: PropsType) {
                       variant={'outline'}
                       size={'icon'}
                       title="Remove field"
+                      type="button"
                       className="h-7 w-7"
                       onClick={() => mobileViewArray.remove(i)}
                     >
@@ -377,7 +380,7 @@ export function ProjectsForm({ isPending, mutate, defaultValues }: PropsType) {
                       <FormLabel className="sr-only">caption</FormLabel>
 
                       <FormControl>
-                        <textarea
+                        <Textarea
                           className={inputStyle({
                             className: 'resize-y min-h-10',
                           })}
