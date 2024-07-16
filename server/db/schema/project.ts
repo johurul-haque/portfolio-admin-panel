@@ -17,7 +17,6 @@ export const projectsTable = d.pgTable('projects', {
 
 export const createProjectSchema = createInsertSchema(projectsTable, {
   source_code: z.string().url(),
-  live_site: z.string().url(),
 }).omit({
   id: true,
 });

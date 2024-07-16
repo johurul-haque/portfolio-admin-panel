@@ -45,7 +45,7 @@ export const projectsRoutes = new Hono()
       return c.json(result);
     }
   )
-  .delete('/:projectId/delete', async (c) => {
+  .delete('/:projectId', async (c) => {
     const projectId = c.req.param('projectId');
 
     const result = await deleteProject(projectId);

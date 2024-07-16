@@ -206,7 +206,6 @@ export function ProjectsForm({ isPending, mutate, defaultValues }: PropsType) {
               <FormLabel>Live site</FormLabel>
               <FormControl>
                 <Input
-                  type="url"
                   placeholder="Preview site link"
                   disabled={isPending}
                   {...field}
