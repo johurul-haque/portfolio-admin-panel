@@ -22,7 +22,6 @@ import { Input } from '@/components/ui/input';
 import { handleResponse } from '@/lib/handle-response';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { aboutInfoPayload } from '@server/db/schema/about-info';
 import { useMutation } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { Trash2Icon } from 'lucide-react';
@@ -54,8 +53,6 @@ const formSchema = z.object({
   skills: z.string(),
   contacts: z.object({ value: z.string() }).array(),
 });
-
-aboutInfoPayload;
 
 type formSchema = z.infer<typeof formSchema>;
 
@@ -115,7 +112,7 @@ function Component() {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit((values) => mutate(values))}
-              className="grid items-start grid-cols-2 gap-4"
+              className="grid items-start sm:grid-cols-2 gap-4"
             >
               <FormField
                 control={form.control}

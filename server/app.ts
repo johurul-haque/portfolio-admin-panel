@@ -4,6 +4,7 @@ import { logger } from 'hono/logger';
 import { aboutInfoRoutes } from './src/modules/about-info/about-info.controller';
 import { authRoutes } from './src/modules/auth/auth.controller';
 import { blogRoutes } from './src/modules/blog/blog.controller';
+import { projectsRoutes } from './src/modules/project/project.controller';
 
 export const app = new Hono();
 
@@ -13,7 +14,8 @@ const apiRoutes = app
   .basePath('/api')
   .route('/auth', authRoutes)
   .route('/blogs', blogRoutes)
-  .route('/about-info', aboutInfoRoutes);
+  .route('/about-info', aboutInfoRoutes)
+  .route('/projects', projectsRoutes);
 
 app.get('*', serveStatic({ root: './client/dist' }));
 app.get('*', serveStatic({ path: './client/dist/index.html' }));
