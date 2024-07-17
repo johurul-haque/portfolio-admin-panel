@@ -26,6 +26,7 @@ import { useMutation } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { Trash2Icon } from 'lucide-react';
 import { JSONContent } from 'novel';
+import { useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -60,6 +61,8 @@ function Component() {
   const data = Route.useLoaderData();
   const { queryClient } = Route.useRouteContext();
 
+  const [contentInMd, setContentInMd] = useState('');
+
   const form = useForm<formSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -81,6 +84,7 @@ function Component() {
       const res = await api['about-info'][':id'].$patch({
         json: {
           ...formValues,
+          about_content: contentInMd,
           contacts,
         },
         param: { id: data.id },
@@ -246,6 +250,7 @@ function Component() {
                     </div>
                     <FormControl>
                       <Editor
+                        setContentInMd={setContentInMd}
                         onChange={field.onChange}
                         value={field.value as unknown as JSONContent}
                         disabled={isPending}

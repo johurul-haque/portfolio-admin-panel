@@ -11,7 +11,7 @@ export function Editor({
   value: JSONContent;
   disabled: boolean;
   onChange: (...event: unknown[]) => void;
-  setContentInMd?: React.Dispatch<React.SetStateAction<string>>;
+  setContentInMd: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
     <EditorRoot>
