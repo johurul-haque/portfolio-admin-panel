@@ -29,7 +29,7 @@ export function Editor({
         editable={!disabled}
         onUpdate={({ editor }) => {
           onChange(editor.getJSON());
-          setContentInMd && setContentInMd(editor.getText());
+          setContentInMd && setContentInMd(editor.getHTML());
         }}
       />
     </EditorRoot>
