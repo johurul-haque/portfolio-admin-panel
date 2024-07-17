@@ -4,6 +4,7 @@
   "scripts": {
     "i:dep": "pnpm i && cd client && pnpm i",
     "dev": "tsx watch ./server/index.ts",
+    "start": "tsx watch ./server/index.ts",
     "build": "cd client && pnpm install --frozen-lockfile && pnpm build",
     "db:seed": "tsx server/db/seed.ts",
     "db:generate": "drizzle-kit generate",
