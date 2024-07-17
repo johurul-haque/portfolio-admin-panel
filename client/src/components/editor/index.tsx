@@ -6,10 +6,12 @@ export function Editor({
   value,
   disabled,
   onChange,
+  setContentInMd,
 }: {
   value: JSONContent;
   disabled: boolean;
   onChange: (...event: unknown[]) => void;
+  setContentInMd: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
     <EditorRoot>
@@ -27,6 +29,7 @@ export function Editor({
         editable={!disabled}
         onUpdate={({ editor }) => {
           onChange(editor.getJSON());
+          setContentInMd(editor.getText());
         }}
       />
     </EditorRoot>

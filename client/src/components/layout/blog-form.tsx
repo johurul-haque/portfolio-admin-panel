@@ -12,6 +12,7 @@ import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UseMutateFunction } from '@tanstack/react-query';
 import { JSONContent } from 'novel';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Editor } from '../editor';
@@ -32,12 +33,16 @@ type PropsType = {
     {
       title: string;
       content: string;
+    } & {
+      contentInMd: string;
     },
     unknown
   >;
 };
 
 export function BlogForm({ defaultValues, mutate, isPending }: PropsType) {
+  const [contentInMd, setContentInMd] = useState('');
+
   const form = useForm<blogFormSchema>({
     resolver: zodResolver(blogFormSchema),
     defaultValues: {
@@ -49,7 +54,9 @@ export function BlogForm({ defaultValues, mutate, isPending }: PropsType) {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit((values) => mutate(values))}
+        onSubmit={form.handleSubmit((values) =>
+          mutate({ ...values, contentInMd })
+        )}
         className="space-y-6 mt-8"
       >
         <FormField
@@ -79,6 +86,7 @@ export function BlogForm({ defaultValues, mutate, isPending }: PropsType) {
               <FormControl>
                 <Editor
                   onChange={field.onChange}
+                  setContentInMd={setContentInMd}
                   value={field.value as unknown as JSONContent}
                   disabled={isPending}
                 />

@@ -57,6 +57,13 @@
       "when": 1721157753549,
       "tag": "0007_fluffy_giant_man",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1721208376144,
+      "tag": "0008_hot_lightspeed",
+      "breakpoints": true
     }
   ]
 }

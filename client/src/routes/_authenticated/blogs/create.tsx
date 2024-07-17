@@ -15,7 +15,7 @@ function Component() {
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (values: blogFormSchema) => {
+    mutationFn: async (values: blogFormSchema & { contentInMd: string }) => {
       const res = await api.blogs.create.$post({ json: values });
 
       return await handleResponse(res);

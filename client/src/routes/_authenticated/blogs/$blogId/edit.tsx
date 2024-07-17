@@ -30,7 +30,11 @@ function Component() {
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (values: blogFormSchema) => {
+    mutationFn: async (
+      values: blogFormSchema & {
+        contentInMd: string;
+      }
+    ) => {
       const res = await api.blogs[':blogId'].edit.$patch({
         json: values,
         param: { blogId: blog.id },

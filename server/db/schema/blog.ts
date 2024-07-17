@@ -5,6 +5,7 @@ export const blogsTable = d.pgTable('blogs', {
   id: d.uuid('id').primaryKey().defaultRandom(),
   title: d.text('title').notNull(),
   content: d.varchar('content').notNull(),
+  contentInMd: d.text('contentInMd').notNull(),
   publish_date: d.date('publish_date').notNull().defaultNow(),
 });
 
