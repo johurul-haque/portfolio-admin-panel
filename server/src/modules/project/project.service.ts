@@ -9,6 +9,7 @@ export async function getAllProjects() {
       name: true,
       intro: true,
       cover_img: true,
+      live_site: true,
     },
   });
 }
