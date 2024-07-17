@@ -32,7 +32,7 @@ function Component() {
   const { mutate, isPending } = useMutation({
     mutationFn: async (
       values: blogFormSchema & {
-        contentInMd: string;
+        content_in_md: string;
       }
     ) => {
       const res = await api.blogs[':blogId'].edit.$patch({

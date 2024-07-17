@@ -34,7 +34,7 @@ type PropsType = {
       title: string;
       content: string;
     } & {
-      contentInMd: string;
+      content_in_md: string;
     },
     unknown
   >;
@@ -55,7 +55,7 @@ export function BlogForm({ defaultValues, mutate, isPending }: PropsType) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((values) =>
-          mutate({ ...values, contentInMd })
+          mutate({ ...values, content_in_md: contentInMd })
         )}
         className="space-y-6 mt-8"
       >
