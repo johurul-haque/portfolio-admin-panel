@@ -5,7 +5,7 @@ import { env } from '../src/config/env';
 import { usersTable } from './schema/user';
 
 (async () => {
-  const username = 'johurul_haque';
+  const username = env.USERNAME;
 
   const user = await db
     .select()
